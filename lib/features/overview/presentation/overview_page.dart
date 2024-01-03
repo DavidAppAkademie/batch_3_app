@@ -1,3 +1,4 @@
+import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:batch_3_app/main.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,20 @@ class OverviewPage extends StatelessWidget {
             // get content from contentList at position i
             final currentContent = contentList[i];
             return ListTile(
-              title: Text(currentContent.title),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) =>
+                        ContentDetailPage(content: currentContent),
+                  ),
+                );
+              },
+              title: Card(
+                  child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(currentContent.title),
+              )),
             );
           },
         ),

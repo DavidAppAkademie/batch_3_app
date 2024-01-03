@@ -5,6 +5,7 @@ import 'package:batch_3_app/features/overview/model/feedback.dart';
 import 'package:batch_3_app/features/overview/model/normal_user.dart';
 import 'package:batch_3_app/features/overview/model/tutor.dart';
 import 'package:batch_3_app/features/overview/model/user.dart';
+import 'package:flutter/material.dart' hide Feedback;
 
 class DatabaseRepository {
   // private attributes
@@ -21,6 +22,12 @@ class DatabaseRepository {
         "class bla ....", "David Sent"),
     Content("Abstrakte Klassen", "Das ist eine Beispielbeschreibung zu Klassen",
         "class bla ....", "David Sent"),
+    Content(
+        "ElevatedButton",
+        "Das ist eine Beispielbeschreibung fuer den Button",
+        "ElevatedButton(..., ..., ...)",
+        "David Sent",
+        ElevatedButton(onPressed: () {}, child: const Text("Sample Button"))),
   ];
   final List<Feedback> _feedbackList = [
     Feedback(5, "Tolle App :)"),
