@@ -16,8 +16,13 @@ class DatabaseRepository {
     NormalUser("Hans", "Meyer", "randomUser123", "randomuser@yahoo.com"),
   ];
   final List<Content> _contentList = [
-    Content("Funktionen", "Das ist eine Beispielbeschreibung zu Funktionen",
-        "void main....", "David Sent"),
+    Content(
+        "Funktionen",
+        "Das ist eine Beispielbeschreibung zu Funktionen",
+        """List<User> getUsers() {
+    return _users;
+  }""",
+        "David Sent"),
     Content("Klassen", "Das ist eine Beispielbeschreibung zu Klassen",
         "class bla ....", "David Sent"),
     Content("Abstrakte Klassen", "Das ist eine Beispielbeschreibung zu Klassen",

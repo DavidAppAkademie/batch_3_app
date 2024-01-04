@@ -1,5 +1,7 @@
 import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/vs.dart';
 
 class ContentDetailPage extends StatefulWidget {
   final Content content;
@@ -29,7 +31,17 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
             const SizedBox(
               height: 32,
             ),
-            _isCodeView ? Text(widget.content.sampleCode) : _sampleWidget,
+            _isCodeView
+                ? HighlightView(
+                    widget.content.sampleCode,
+                    language: 'dart',
+                    padding: const EdgeInsets.all(8),
+                    textStyle: const TextStyle(
+                      fontSize: 12,
+                    ),
+                    theme: vsTheme,
+                  )
+                : _sampleWidget,
             TextButton(
               onPressed: () {
                 setState(() {
