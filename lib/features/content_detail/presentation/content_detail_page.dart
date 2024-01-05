@@ -1,7 +1,7 @@
+import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
+import 'package:batch_3_app/features/overview/presentation/syntax_highlight.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_highlight/flutter_highlight.dart';
-import 'package:flutter_highlight/themes/vs.dart';
 
 class ContentDetailPage extends StatefulWidget {
   final Content content;
@@ -20,37 +20,34 @@ class _ContentDetailPageState extends State<ContentDetailPage> {
         title: const Text('Detailansicht'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Text(widget.content.title),
-            const SizedBox(
-              height: 32,
-            ),
-            Text(widget.content.description),
-            const SizedBox(
-              height: 32,
-            ),
-            _isCodeView
-                ? HighlightView(
-                    widget.content.sampleCode,
-                    language: 'dart',
-                    padding: const EdgeInsets.all(8),
-                    textStyle: const TextStyle(
-                      fontSize: 12,
-                    ),
-                    theme: vsTheme,
-                  )
-                : _sampleWidget,
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  _isCodeView = !_isCodeView;
-                });
-              },
-              child: Text(_isCodeView ? "Widget-Ansicht" : "Code-Ansicht"),
-            ),
-          ],
+        padding: const EdgeInsets.all(Sizes.p16),
+        child: Center(
+          child: Column(
+            children: [
+              Text(
+                widget.content.title,
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              gapH32,
+              Text(
+                widget.content.description,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              gapH32,
+              _isCodeView
+                  ? SyntaxHighlight(code: widget.content.sampleCode)
+                  : _sampleWidget,
+              gapH32,
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    _isCodeView = !_isCodeView;
+                  });
+                },
+                child: Text(_isCodeView ? "Widget-Ansicht" : "Code-Ansicht"),
+              ),
+            ],
+          ),
         ),
       ),
     );

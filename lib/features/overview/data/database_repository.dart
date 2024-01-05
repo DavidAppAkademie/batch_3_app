@@ -30,7 +30,11 @@ class DatabaseRepository {
     Content(
         "ElevatedButton",
         "Das ist eine Beispielbeschreibung fuer den Button",
-        "ElevatedButton(..., ..., ...)",
+        """ElevatedButton(
+            style: style,
+            onPressed: () {},
+            child: const Text('Enabled'),
+          ),""",
         "David Sent",
         ElevatedButton(onPressed: () {}, child: const Text("Sample Button"))),
   ];

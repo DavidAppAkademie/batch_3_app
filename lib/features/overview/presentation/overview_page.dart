@@ -1,3 +1,4 @@
+import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:batch_3_app/main.dart';
@@ -13,7 +14,7 @@ class OverviewPage extends StatelessWidget {
         title: const Text('Übersicht'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(Sizes.p16),
         child: ListView.builder(
           itemCount: contentList.length,
           itemBuilder: (context, i) {
@@ -31,7 +32,7 @@ class OverviewPage extends StatelessWidget {
               },
               title: Card(
                   child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(Sizes.p16),
                 child: Text(currentContent.title),
               )),
             );

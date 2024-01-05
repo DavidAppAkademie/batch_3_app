@@ -1,5 +1,5 @@
 import 'package:batch_3_app/config/theme.dart';
-import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
+import 'package:batch_3_app/features/sign_up/presentation/sign_up_page.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -10,7 +10,7 @@ class App extends StatelessWidget {
       theme: getLightTheme(),
       darkTheme: getDarkTheme(),
       themeMode: ThemeMode.light,
-      home: const OverviewPage(),
+      home: const SignUpPage(),
     );
   }
 }
