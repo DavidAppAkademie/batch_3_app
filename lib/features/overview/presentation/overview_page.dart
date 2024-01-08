@@ -1,6 +1,7 @@
 import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
+import 'package:batch_3_app/features/settings/presentation/settings_page.dart';
 import 'package:batch_3_app/main.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,21 @@ class OverviewPage extends StatelessWidget {
     final List<Content> contentList = databaseRepository.getContent();
     return Scaffold(
       appBar: AppBar(
+        //TODO: add avatar (leading)
         title: const Text('Übersicht'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const SettingsPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(Sizes.p16),
