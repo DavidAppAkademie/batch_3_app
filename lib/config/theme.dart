@@ -1,3 +1,4 @@
+import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/config/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,15 @@ ThemeData _getThemeData({required bool isDarkMode}) {
       textTheme: customTextTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
+              padding: MaterialStateProperty.all<EdgeInsets>(
+                const EdgeInsets.symmetric(
+                    vertical: Sizes.p16, horizontal: Sizes.p64),
+              ),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(Sizes.p8),
+                // side: BorderSide(color: Colors.red)
+              )),
               backgroundColor: MaterialStateProperty.all<Color>(batchYellow))));
 }
 
