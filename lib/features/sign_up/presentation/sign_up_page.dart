@@ -36,6 +36,25 @@ class SignUpPage extends StatelessWidget {
                 child: const Text("Passwort vergessen"),
               ),
             ),
+            gapH32,
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(child: Divider()),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: Sizes.p8),
+                  child: Text("Noch kein Konto?"),
+                ),
+                Expanded(child: Divider()),
+              ],
+            ),
+            gapH32,
+            Center(
+              child: TextButton(
+                onPressed: () {},
+                child: const Text("Kostenlos registrieren"),
+              ),
+            ),
           ],
         ),
       ),
