@@ -7,11 +7,14 @@ ThemeData _getThemeData({required bool isDarkMode}) {
       isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme;
   TextTheme customTextTheme =
       baseTextTheme.apply(fontFamily: GoogleFonts.archivo().fontFamily);
-  return ThemeData.from(
+  return ThemeData(
       colorScheme: _getColorScheme(
         isDarkMode: isDarkMode,
       ),
-      textTheme: customTextTheme);
+      textTheme: customTextTheme,
+      elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(batchYellow))));
 }
 
 ThemeData getDarkTheme() {
