@@ -68,7 +68,10 @@ class DatabaseRepository {
     return _contentList;
   }
 
-  void addContent(Content content) {
+  Future<void> addContent(Content content) async {
+    // simulating slow connection (waiting 5 secs)
+    await Future.delayed(const Duration(seconds: 5));
+    // add new content to database
     _contentList.add(content);
   }
 
