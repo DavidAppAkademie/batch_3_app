@@ -9,7 +9,7 @@ class OverviewPage extends StatelessWidget {
   const OverviewPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final List<Content> contentList = databaseRepository.getContent();
+    final Future<List<Content>> contentList = databaseRepository.getContent();
     return Scaffold(
       appBar: AppBar(
         //TODO: add avatar (leading)
@@ -30,27 +30,40 @@ class OverviewPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(Sizes.p16),
-        child: ListView.builder(
-          itemCount: contentList.length,
-          itemBuilder: (context, i) {
-            // get content from contentList at position i
-            final currentContent = contentList[i];
-            return ListTile(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) =>
-                        ContentDetailPage(content: currentContent),
-                  ),
-                );
-              },
-              title: Card(
-                  child: Padding(
-                padding: const EdgeInsets.all(Sizes.p16),
-                child: Text(currentContent.title),
-              )),
-            );
+        child: FutureBuilder(
+          future: contentList,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final contents = snapshot.data!;
+              // Daten fertig geladen, Future entpackt
+              return ListView.builder(
+                itemCount: contents.length,
+                itemBuilder: (context, i) {
+                  // get content from contentList at position i
+                  final currentContent = contents[i];
+                  return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              ContentDetailPage(content: currentContent),
+                        ),
+                      );
+                    },
+                    title: Card(
+                        child: Padding(
+                      padding: const EdgeInsets.all(Sizes.p16),
+                      child: Text(currentContent.title),
+                    )),
+                  );
+                },
+              );
+            } else {
+              // else -> Daten nicht fertig geladen
+              // nicht fertig geladen -> entweder Ladend oder Error
+              return const Center(child: CircularProgressIndicator());
+            }
           },
         ),
       ),

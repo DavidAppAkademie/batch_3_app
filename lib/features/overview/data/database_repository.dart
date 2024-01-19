@@ -61,7 +61,10 @@ class DatabaseRepository {
   }
 
   // Content functions
-  List<Content> getContent() {
+  Future<List<Content>> getContent() async {
+    // simulating slow connection (waiting 2 secs)
+    await Future.delayed(const Duration(seconds: 2));
+    // return database contents
     return _contentList;
   }
 
