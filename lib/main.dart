@@ -1,5 +1,5 @@
 import 'package:batch_3_app/app.dart';
-import 'package:batch_3_app/features/overview/data/database_repository.dart';
+import 'package:batch_3_app/features/overview/data/mock/mock_database_overview_repository.dart';
 import 'package:flutter/material.dart';
 
 /*
@@ -16,7 +16,8 @@ Content Formular
 Content Verwaltung
 
   */
-DatabaseRepository databaseRepository = DatabaseRepository();
+MockDatabaseOverviewRepository databaseRepository =
+    MockDatabaseOverviewRepository();
 void main() {
   runApp(const App());
 }
