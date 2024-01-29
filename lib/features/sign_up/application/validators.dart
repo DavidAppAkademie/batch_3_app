@@ -1,17 +1,7 @@
 bool _isEmailLegit(String? input) {
-  if (input == null) {
-    return false;
-  }
-  if (input.length < 6) {
-    return false;
-  }
-  if (!input.contains('@')) {
-    return false;
-  }
-  if (!input.contains('.')) {
-    return false;
-  }
-  return true;
+  RegExp exp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  return exp.hasMatch(input ?? "");
 }
 
 String? emailErrorText(String? input) {
@@ -24,7 +14,8 @@ String? emailErrorText(String? input) {
 }
 
 bool _isPasswordLegit(String? input) {
-  return input != null && input.length >= 6 && _hasUpperCase(input);
+  RegExp exp = RegExp(r'^(?=.*[A-Z]).{6,}$');
+  return exp.hasMatch(input ?? "");
 }
 
 String? passwordErrorText(String? input) {
@@ -34,8 +25,4 @@ String? passwordErrorText(String? input) {
   } else {
     return null;
   }
-}
-
-bool _hasUpperCase(String str) {
-  return str != str.toLowerCase();
 }
