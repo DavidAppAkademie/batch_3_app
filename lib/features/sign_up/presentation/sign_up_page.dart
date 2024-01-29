@@ -28,7 +28,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 gapH32,
                 const Text("E-Mail"),
                 TextFormField(
-                  autovalidateMode: AutovalidateMode.always,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration:
                       const InputDecoration(border: OutlineInputBorder()),
                   validator: emailErrorText,
@@ -37,7 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 const Text("Passwort"),
                 TextFormField(
                   obscureText: true,
-                  autovalidateMode: AutovalidateMode.always,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration:
                       const InputDecoration(border: OutlineInputBorder()),
                   validator: passwordErrorText,
