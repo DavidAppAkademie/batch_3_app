@@ -1,4 +1,5 @@
 import 'package:batch_3_app/config/app_sizes.dart';
+import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
 import 'package:batch_3_app/features/sign_up/application/validators.dart';
@@ -6,8 +7,12 @@ import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
   final DatabaseOverviewRepository databaseOverviewRepository;
-  const SignUpPage({Key? key, required this.databaseOverviewRepository})
-      : super(key: key);
+  final DatabaseAddFeedbackRepository databaseAddFeedbackRepository;
+  const SignUpPage({
+    Key? key,
+    required this.databaseOverviewRepository,
+    required this.databaseAddFeedbackRepository,
+  }) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -50,12 +55,16 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        // erfolgreicher Login => OverViewPage
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(
                             builder: (BuildContext context) => OverviewPage(
-                                databaseOverviewRepository:
-                                    widget.databaseOverviewRepository),
+                              databaseOverviewRepository:
+                                  widget.databaseOverviewRepository,
+                              databaseAddFeedbackRepository:
+                                  widget.databaseAddFeedbackRepository,
+                            ),
                           ),
                         );
                       }

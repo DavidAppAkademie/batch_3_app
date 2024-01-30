@@ -1,4 +1,5 @@
 import 'package:batch_3_app/features/overview/model/content.dart';
+import 'package:batch_3_app/features/overview/model/feedback.dart';
 import 'package:flutter/material.dart' hide Feedback;
 
 class MockDatabaseService {
@@ -32,4 +33,5 @@ class MockDatabaseService {
         "David Sent",
         ElevatedButton(onPressed: () {}, child: const Text("Sample Button"))),
   ];
+  final List<Feedback> feedbackList = [];
 }

@@ -1,4 +1,5 @@
 import 'package:batch_3_app/config/app_sizes.dart';
+import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
 import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
@@ -7,9 +8,12 @@ import 'package:flutter/material.dart';
 
 class OverviewPage extends StatelessWidget {
   final DatabaseOverviewRepository databaseOverviewRepository;
-
-  const OverviewPage({Key? key, required this.databaseOverviewRepository})
-      : super(key: key);
+  final DatabaseAddFeedbackRepository databaseAddFeedbackRepository;
+  const OverviewPage({
+    Key? key,
+    required this.databaseOverviewRepository,
+    required this.databaseAddFeedbackRepository,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final Future<List<Content>> contentList =
