@@ -5,6 +5,9 @@ import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_rep
 import 'package:batch_3_app/features/add_feedback/data/mock/mock_database_add_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/data/mock/mock_database_overview_repository.dart';
+import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
+import 'package:batch_3_app/features/settings/data/shared_prefs/shared_prefs_repository.dart';
+import 'package:batch_3_app/features/settings/data/shared_prefs/shared_prefs_service.dart';
 import 'package:batch_3_app/features/sign_up/presentation/sign_up_page.dart';
 import 'package:batch_3_app/mock_database/mock_database_service.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +30,14 @@ class App extends StatelessWidget {
     final DatabaseAddContentRepository databaseAddContentRepository =
         MockDatabaseAddContentRepository(mockDatabaseService);
 
+    // create service object that accesses local storage using shared prefs package
+    final sharedPrefsService = SharedPrefsService();
+
+    // Passing this service object to the local storage repository
+    //
+    final LocalStorageRepository localStorageRepository =
+        SharedPrefsRepository(sharedPrefsService);
+
     return MaterialApp(
       theme: getLightTheme(),
       darkTheme: getDarkTheme(),
@@ -35,6 +46,7 @@ class App extends StatelessWidget {
         databaseOverviewRepository: databaseOverviewRepository,
         databaseAddFeedbackRepository: databaseAddFeedbackRepository,
         databaseAddContentRepository: databaseAddContentRepository,
+        localStorageRepository: localStorageRepository,
       ),
     );
   }
