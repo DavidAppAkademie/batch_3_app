@@ -3,7 +3,7 @@ import 'package:batch_3_app/features/add_content/data/database_add_content_repos
 import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
-import 'package:batch_3_app/features/sign_up/application/validators.dart';
+import 'package:batch_3_app/features/sign_up/application/sign_up_validators.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {

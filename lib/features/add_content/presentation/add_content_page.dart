@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:batch_3_app/config/app_sizes.dart';
+import 'package:batch_3_app/features/add_content/application/add_content_validators.dart';
 import 'package:batch_3_app/features/add_content/data/database_add_content_repository.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class _AddContentPageState extends State<AddContentPage> {
                   controller: _titleController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: const InputDecoration(hintText: "Titel"),
-                  validator: null,
+                  validator: contentTitleErrorText,
                 ),
                 gapH16,
                 TextFormField(
@@ -54,7 +55,7 @@ class _AddContentPageState extends State<AddContentPage> {
                   controller: _descriptionController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration: const InputDecoration(hintText: "Beschreibung"),
-                  validator: null,
+                  validator: contentDescriptionErrorText,
                 ),
                 gapH16,
                 TextFormField(
@@ -64,7 +65,7 @@ class _AddContentPageState extends State<AddContentPage> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   decoration:
                       const InputDecoration(hintText: "Sample Code (optional)"),
-                  validator: null,
+                  validator: contentCodeSampleErrorText,
                 ),
                 gapH32,
                 ElevatedButton(
@@ -95,6 +96,11 @@ class _AddContentPageState extends State<AddContentPage> {
                       // whatever it might be (json, sharedprefs, firestore, mock, etc.)
                       await widget.databaseAddContentRepository
                           .addContent(newContent);
+
+                      if (!context.mounted) return;
+                      Navigator.pop(context);
+                    } else {
+                      debugPrint("Form fehlerhaft!");
                     }
                   },
                   child: const Text("Content einsenden!"),
