@@ -3,6 +3,7 @@ import 'package:batch_3_app/features/overview/model/feedback.dart';
 import 'package:flutter/material.dart' hide Feedback;
 
 class MockDatabaseService {
+  // SIMULATED DATABASE
   // private attributes
   final List<Content> contentList = [
     Content(

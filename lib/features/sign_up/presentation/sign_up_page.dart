@@ -1,4 +1,5 @@
 import 'package:batch_3_app/config/app_sizes.dart';
+import 'package:batch_3_app/features/add_content/data/database_add_content_repository.dart';
 import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
@@ -8,10 +9,12 @@ import 'package:flutter/material.dart';
 class SignUpPage extends StatefulWidget {
   final DatabaseOverviewRepository databaseOverviewRepository;
   final DatabaseAddFeedbackRepository databaseAddFeedbackRepository;
+  final DatabaseAddContentRepository databaseAddContentRepository;
   const SignUpPage({
     Key? key,
     required this.databaseOverviewRepository,
     required this.databaseAddFeedbackRepository,
+    required this.databaseAddContentRepository,
   }) : super(key: key);
 
   @override
@@ -64,6 +67,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   widget.databaseOverviewRepository,
                               databaseAddFeedbackRepository:
                                   widget.databaseAddFeedbackRepository,
+                              databaseAddContentRepository:
+                                  widget.databaseAddContentRepository,
                             ),
                           ),
                         );

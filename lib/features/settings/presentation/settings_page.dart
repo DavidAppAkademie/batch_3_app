@@ -1,6 +1,7 @@
 import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:flutter/material.dart';
 
+//TODO: implement settings page!
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
   @override
@@ -12,7 +13,9 @@ class SettingsPage extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(Sizes.p16),
         child: Column(
-          children: [Text("Settings")],
+          children: [
+            Text("Settings"),
+          ],
         ),
       ),
     );
