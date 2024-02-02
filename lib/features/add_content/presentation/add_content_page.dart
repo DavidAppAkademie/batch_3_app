@@ -34,69 +34,73 @@ class _AddContentPageState extends State<AddContentPage> {
       appBar: AppBar(
         title: const Text('Add content'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(Sizes.p16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _titleController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Titel"),
-                validator: null,
-              ),
-              gapH16,
-              TextFormField(
-                controller: _descriptionController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Beschreibung"),
-                validator: null,
-              ),
-              gapH16,
-              TextFormField(
-                controller: _sampleCodeController,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), hintText: "Sample Code"),
-                validator: null,
-              ),
-              gapH32,
-              ElevatedButton(
-                onPressed: () async {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    // extract all relevant values from text controllers
-                    final id = Random().nextInt(10000000).toString();
-                    final title = _titleController.text;
-                    final description = _descriptionController.text;
-                    final sampleCode = _sampleCodeController.text;
-                    const authorFullName = "David";
-                    const Widget? sampleWidget = null;
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(Sizes.p16),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _titleController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Titel"),
+                  validator: null,
+                ),
+                gapH16,
+                TextFormField(
+                  controller: _descriptionController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Beschreibung"),
+                  validator: null,
+                ),
+                gapH16,
+                TextFormField(
+                  minLines: 3,
+                  maxLines: 60,
+                  controller: _sampleCodeController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: "Sample Code"),
+                  validator: null,
+                ),
+                gapH32,
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      // extract all relevant values from text controllers
+                      final id = Random().nextInt(10000000).toString();
+                      final title = _titleController.text;
+                      final description = _descriptionController.text;
+                      final sampleCode = _sampleCodeController.text;
+                      const authorFullName = "David";
+                      const Widget? sampleWidget = null;
 
-                    // reset all controllers
-                    _clearFields();
+                      // reset all controllers
+                      _clearFields();
 
-                    // create new content object
-                    final newContent = Content(
-                      id,
-                      title,
-                      description,
-                      sampleCode,
-                      authorFullName,
-                      sampleWidget,
-                    );
+                      // create new content object
+                      final newContent = Content(
+                        id,
+                        title,
+                        description,
+                        sampleCode,
+                        authorFullName,
+                        sampleWidget,
+                      );
 
-                    // add new content object to database
-                    // whatever it might be (json, sharedprefs, firestore, mock, etc.)
-                    await widget.databaseAddContentRepository
-                        .addContent(newContent);
-                  }
-                },
-                child: const Text("Content einsenden!"),
-              ),
-            ],
+                      // add new content object to database
+                      // whatever it might be (json, sharedprefs, firestore, mock, etc.)
+                      await widget.databaseAddContentRepository
+                          .addContent(newContent);
+                    }
+                  },
+                  child: const Text("Content einsenden!"),
+                ),
+              ],
+            ),
           ),
         ),
       ),
