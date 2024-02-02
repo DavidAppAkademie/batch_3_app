@@ -12,6 +12,9 @@ ThemeData _getThemeData({required bool isDarkMode}) {
       colorScheme: _getColorScheme(
         isDarkMode: isDarkMode,
       ),
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(),
+      ),
       textTheme: customTextTheme,
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(

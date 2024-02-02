@@ -44,26 +44,26 @@ class _AddContentPageState extends State<AddContentPage> {
                 TextFormField(
                   controller: _titleController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Titel"),
-                  validator: null,
-                ),
-                gapH16,
-                TextFormField(
-                  controller: _descriptionController,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Beschreibung"),
+                  decoration: const InputDecoration(hintText: "Titel"),
                   validator: null,
                 ),
                 gapH16,
                 TextFormField(
                   minLines: 3,
-                  maxLines: 60,
+                  maxLines: 120,
+                  controller: _descriptionController,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration: const InputDecoration(hintText: "Beschreibung"),
+                  validator: null,
+                ),
+                gapH16,
+                TextFormField(
+                  minLines: 3,
+                  maxLines: 120,
                   controller: _sampleCodeController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: "Sample Code"),
+                  decoration:
+                      const InputDecoration(hintText: "Sample Code (optional)"),
                   validator: null,
                 ),
                 gapH32,
