@@ -46,11 +46,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           Switch(
                             value: isDarkMode,
                             onChanged: (newValue) async {
-                              widget.localStorageRepository
-                                  .setThemeMode(isDarkMode: newValue)
-                                  .then((value) {
-                                setState(() {});
-                              });
+                              await widget.localStorageRepository
+                                  .setThemeMode(isDarkMode: newValue);
+                              setState(() {});
                             },
                           ),
                         ],
