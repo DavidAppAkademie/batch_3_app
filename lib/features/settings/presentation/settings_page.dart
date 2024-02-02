@@ -53,15 +53,6 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                         ],
                       ),
-                      IconButton(
-                        onPressed: () {
-                          setState(() {
-                            darkModeFuture =
-                                widget.localStorageRepository.getIsDarkMode();
-                          });
-                        },
-                        icon: const Icon(Icons.refresh),
-                      ),
                     ],
                   );
                 } else {
