@@ -1,8 +1,8 @@
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/add_content/data/database_add_content_repository.dart';
 import 'package:batch_3_app/features/add_content/presentation/add_content_page.dart';
-import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
+import 'package:batch_3_app/features/content/data/database_content_repository.dart';
 import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
+import 'package:batch_3_app/features/feedback/data/database_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 
 class OverviewPage extends StatefulWidget {
   final DatabaseOverviewRepository databaseOverviewRepository;
-  final DatabaseAddFeedbackRepository databaseAddFeedbackRepository;
-  final DatabaseAddContentRepository databaseAddContentRepository;
+  final DatabaseFeedbackRepository databaseFeedbackRepository;
+  final DatabaseContentRepository databaseContentRepository;
   final LocalStorageRepository localStorageRepository;
 
   const OverviewPage({
     Key? key,
     required this.databaseOverviewRepository,
-    required this.databaseAddFeedbackRepository,
-    required this.databaseAddContentRepository,
+    required this.databaseFeedbackRepository,
     required this.localStorageRepository,
+    required this.databaseContentRepository,
   }) : super(key: key);
 
   @override
@@ -45,8 +45,7 @@ class _OverviewPageState extends State<OverviewPage> {
             context,
             MaterialPageRoute<void>(
               builder: (BuildContext context) => AddContentPage(
-                databaseAddContentRepository:
-                    widget.databaseAddContentRepository,
+                databaseContentRepository: widget.databaseContentRepository,
               ),
             ),
           );

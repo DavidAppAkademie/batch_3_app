@@ -12,6 +12,7 @@ dependencies:
   flutter_highlight: ^0.7.0
   google_fonts: ^6.1.0
   http: ^1.1.2
+  provider: ^6.1.1
   shared_preferences: ^2.2.2
 
 dev_dependencies:

@@ -1,6 +1,6 @@
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/add_content/data/database_add_content_repository.dart';
-import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
+import 'package:batch_3_app/features/content/data/database_content_repository.dart';
+import 'package:batch_3_app/features/feedback/data/database_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
 import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
@@ -9,13 +9,13 @@ import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
   final DatabaseOverviewRepository databaseOverviewRepository;
-  final DatabaseAddFeedbackRepository databaseAddFeedbackRepository;
-  final DatabaseAddContentRepository databaseAddContentRepository;
+  final DatabaseFeedbackRepository databaseFeedbackRepository;
+  final DatabaseContentRepository databaseAddContentRepository;
   final LocalStorageRepository localStorageRepository;
   const SignUpPage({
     Key? key,
     required this.databaseOverviewRepository,
-    required this.databaseAddFeedbackRepository,
+    required this.databaseFeedbackRepository,
     required this.databaseAddContentRepository,
     required this.localStorageRepository,
   }) : super(key: key);
@@ -70,9 +70,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             builder: (BuildContext context) => OverviewPage(
                               databaseOverviewRepository:
                                   widget.databaseOverviewRepository,
-                              databaseAddFeedbackRepository:
-                                  widget.databaseAddFeedbackRepository,
-                              databaseAddContentRepository:
+                              databaseFeedbackRepository:
+                                  widget.databaseFeedbackRepository,
+                              databaseContentRepository:
                                   widget.databaseAddContentRepository,
                               localStorageRepository:
                                   widget.localStorageRepository,

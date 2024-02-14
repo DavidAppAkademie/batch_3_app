@@ -1,8 +1,8 @@
 import 'package:batch_3_app/config/theme.dart';
-import 'package:batch_3_app/features/add_content/data/database_add_content_repository.dart';
-import 'package:batch_3_app/features/add_content/data/mock/mock_database_add_content_repository.dart';
-import 'package:batch_3_app/features/add_feedback/data/database_add_feedback_repository.dart';
-import 'package:batch_3_app/features/add_feedback/data/mock/mock_database_add_feedback_repository.dart';
+import 'package:batch_3_app/features/content/data/database_content_repository.dart';
+import 'package:batch_3_app/features/content/data/mock/mock_database_content_repository.dart';
+import 'package:batch_3_app/features/feedback/data/database_feedback_repository.dart';
+import 'package:batch_3_app/features/feedback/data/mock/mock_database_feedback_repository.dart';
 import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/data/mock/mock_database_overview_repository.dart';
 import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
@@ -22,8 +22,8 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   // Passing this simulated database to all repositories
   late final DatabaseOverviewRepository databaseOverviewRepository;
-  late final DatabaseAddFeedbackRepository databaseAddFeedbackRepository;
-  late final DatabaseAddContentRepository databaseAddContentRepository;
+  late final DatabaseFeedbackRepository databaseFeedbackRepository;
+  late final DatabaseContentRepository databaseContentRepository;
   late final LocalStorageRepository localStorageRepository;
   late Future<bool> isDarkModeFuture;
   @override
@@ -35,10 +35,10 @@ class _AppState extends State<App> {
     final mockDatabaseService = MockDatabaseService();
     databaseOverviewRepository =
         MockDatabaseOverviewRepository(mockDatabaseService);
-    databaseAddFeedbackRepository =
-        MockDatabaseAddFeedbackRepository(mockDatabaseService);
-    databaseAddContentRepository =
-        MockDatabaseAddContentRepository(mockDatabaseService);
+    databaseFeedbackRepository =
+        MockDatabaseFeedbackRepository(mockDatabaseService);
+    databaseContentRepository =
+        MockDatabaseContentRepository(mockDatabaseService);
 
     localStorageRepository =
         SharedPrefsRepository(sharedPrefsService, (newDarkMode) {
@@ -75,8 +75,8 @@ class _AppState extends State<App> {
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
             home: SignUpPage(
               databaseOverviewRepository: databaseOverviewRepository,
-              databaseAddFeedbackRepository: databaseAddFeedbackRepository,
-              databaseAddContentRepository: databaseAddContentRepository,
+              databaseFeedbackRepository: databaseFeedbackRepository,
+              databaseAddContentRepository: databaseContentRepository,
               localStorageRepository: localStorageRepository,
             ),
           );
