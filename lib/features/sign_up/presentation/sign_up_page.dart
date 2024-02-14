@@ -1,23 +1,11 @@
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/content/data/database_content_repository.dart';
-import 'package:batch_3_app/features/feedback/data/database_feedback_repository.dart';
-import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
-import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
 import 'package:batch_3_app/features/sign_up/application/sign_up_validators.dart';
 import 'package:flutter/material.dart';
 
 class SignUpPage extends StatefulWidget {
-  final DatabaseOverviewRepository databaseOverviewRepository;
-  final DatabaseFeedbackRepository databaseFeedbackRepository;
-  final DatabaseContentRepository databaseAddContentRepository;
-  final LocalStorageRepository localStorageRepository;
   const SignUpPage({
     Key? key,
-    required this.databaseOverviewRepository,
-    required this.databaseFeedbackRepository,
-    required this.databaseAddContentRepository,
-    required this.localStorageRepository,
   }) : super(key: key);
 
   @override
@@ -67,16 +55,8 @@ class _SignUpPageState extends State<SignUpPage> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute<void>(
-                            builder: (BuildContext context) => OverviewPage(
-                              databaseOverviewRepository:
-                                  widget.databaseOverviewRepository,
-                              databaseFeedbackRepository:
-                                  widget.databaseFeedbackRepository,
-                              databaseContentRepository:
-                                  widget.databaseAddContentRepository,
-                              localStorageRepository:
-                                  widget.localStorageRepository,
-                            ),
+                            builder: (BuildContext context) =>
+                                const OverviewPage(),
                           ),
                         );
                       }

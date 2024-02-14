@@ -2,14 +2,15 @@ import 'dart:math';
 
 import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/features/add_content/application/add_content_validators.dart';
-import 'package:batch_3_app/features/content/data/database_content_repository.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
+import 'package:batch_3_app/repository_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddContentPage extends StatefulWidget {
-  final DatabaseContentRepository databaseContentRepository;
-  const AddContentPage({Key? key, required this.databaseContentRepository})
-      : super(key: key);
+  const AddContentPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AddContentPage> createState() => _AddContentPageState();
@@ -94,7 +95,9 @@ class _AddContentPageState extends State<AddContentPage> {
 
                       // add new content object to database
                       // whatever it might be (json, sharedprefs, firestore, mock, etc.)
-                      await widget.databaseContentRepository
+                      await context
+                          .read<RepositoryContainer>()
+                          .databaseContentRepository
                           .addContent(newContent);
 
                       if (!context.mounted) return;

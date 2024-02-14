@@ -1,26 +1,15 @@
 import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/features/add_content/presentation/add_content_page.dart';
-import 'package:batch_3_app/features/content/data/database_content_repository.dart';
 import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
-import 'package:batch_3_app/features/feedback/data/database_feedback_repository.dart';
-import 'package:batch_3_app/features/overview/data/database_overview_repository.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
-import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
 import 'package:batch_3_app/features/settings/presentation/settings_page.dart';
+import 'package:batch_3_app/repository_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OverviewPage extends StatefulWidget {
-  final DatabaseOverviewRepository databaseOverviewRepository;
-  final DatabaseFeedbackRepository databaseFeedbackRepository;
-  final DatabaseContentRepository databaseContentRepository;
-  final LocalStorageRepository localStorageRepository;
-
   const OverviewPage({
     Key? key,
-    required this.databaseOverviewRepository,
-    required this.databaseFeedbackRepository,
-    required this.localStorageRepository,
-    required this.databaseContentRepository,
   }) : super(key: key);
 
   @override
@@ -31,22 +20,19 @@ class _OverviewPageState extends State<OverviewPage> {
   late Future<List<Content>> contentList;
 
   @override
-  void initState() {
-    contentList = widget.databaseOverviewRepository.getContent();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    contentList = context
+        .read<RepositoryContainer>()
+        .databaseContentRepository
+        .getContent();
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
-              builder: (BuildContext context) => AddContentPage(
-                databaseContentRepository: widget.databaseContentRepository,
-              ),
+              builder: (BuildContext context) => const AddContentPage(),
             ),
           );
         },
@@ -61,8 +47,7 @@ class _OverviewPageState extends State<OverviewPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) => SettingsPage(
-                      localStorageRepository: widget.localStorageRepository),
+                  builder: (BuildContext context) => const SettingsPage(),
                 ),
               );
             },
@@ -78,7 +63,10 @@ class _OverviewPageState extends State<OverviewPage> {
               child: const Text("Reload test"),
               onPressed: () {
                 setState(() {
-                  contentList = widget.databaseOverviewRepository.getContent();
+                  contentList = context
+                      .read<RepositoryContainer>()
+                      .databaseContentRepository
+                      .getContent();
                 });
               },
             ),

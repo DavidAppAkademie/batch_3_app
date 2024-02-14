@@ -1,12 +1,12 @@
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/settings/data/local_storage_repository.dart';
+import 'package:batch_3_app/repository_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget {
-  final LocalStorageRepository localStorageRepository;
-
-  const SettingsPage({Key? key, required this.localStorageRepository})
-      : super(key: key);
+  const SettingsPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -15,7 +15,10 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    var darkModeFuture = widget.localStorageRepository.getIsDarkMode();
+    var darkModeFuture = context
+        .read<RepositoryContainer>()
+        .localStorageRepository
+        .getIsDarkMode();
 
     return Scaffold(
       appBar: AppBar(
@@ -46,8 +49,13 @@ class _SettingsPageState extends State<SettingsPage> {
                           Switch(
                             value: isDarkMode,
                             onChanged: (newValue) async {
-                              await widget.localStorageRepository
+                              await context
+                                  .read<RepositoryContainer>()
+                                  .localStorageRepository
                                   .setThemeMode(isDarkMode: newValue);
+                              context
+                                  .read<RepositoryContainer>()
+                                  .notifyThemeModeHasChanged();
                               setState(() {});
                             },
                           ),

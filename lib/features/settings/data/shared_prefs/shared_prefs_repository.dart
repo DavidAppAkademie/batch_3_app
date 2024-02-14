@@ -3,8 +3,7 @@ import 'package:batch_3_app/features/settings/data/shared_prefs/shared_prefs_ser
 
 class SharedPrefsRepository implements LocalStorageRepository {
   final SharedPrefsService _sharedPrefsService;
-  final Function(bool) _rebuildMaterialApp;
-  SharedPrefsRepository(this._sharedPrefsService, this._rebuildMaterialApp);
+  SharedPrefsRepository(this._sharedPrefsService);
   @override
   Future<bool> getIsDarkMode() {
     return _sharedPrefsService.getIsDarkmode();
@@ -13,7 +12,5 @@ class SharedPrefsRepository implements LocalStorageRepository {
   @override
   Future<void> setThemeMode({required bool isDarkMode}) async {
     await _sharedPrefsService.setIsDarkmode(isDarkMode);
-    _rebuildMaterialApp(
-        isDarkMode); // identisch mit setState Aufruf in MaterialApp
   }
 }

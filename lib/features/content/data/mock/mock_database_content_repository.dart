@@ -12,4 +12,10 @@ class MockDatabaseContentRepository implements DatabaseContentRepository {
     await Future.delayed(const Duration(seconds: 1));
     return _mockDatabaseService.contentList.add(content);
   }
+
+  @override
+  Future<List<Content>> getContent() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return _mockDatabaseService.contentList;
+  }
 }
