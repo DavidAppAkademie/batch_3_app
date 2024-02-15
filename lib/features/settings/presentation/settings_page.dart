@@ -53,6 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   .read<RepositoryContainer>()
                                   .localStorageRepository
                                   .setThemeMode(isDarkMode: newValue);
+                              if (!context.mounted) return;
                               context
                                   .read<RepositoryContainer>()
                                   .notifyThemeModeHasChanged();
