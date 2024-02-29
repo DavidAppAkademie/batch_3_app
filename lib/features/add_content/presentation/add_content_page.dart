@@ -121,10 +121,4 @@ class _AddContentPageState extends State<AddContentPage> {
       ),
     );
   }
-
-  void _clearFields() {
-    _titleController.clear();
-    _descriptionController.clear();
-    _sampleCodeController.clear();
-  }
 }
