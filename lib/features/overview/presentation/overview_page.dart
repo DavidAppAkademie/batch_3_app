@@ -39,7 +39,6 @@ class _OverviewPageState extends State<OverviewPage> {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
-        //TODO: add avatar (leading)
         title: const Text('Übersicht'),
         actions: [
           IconButton(
