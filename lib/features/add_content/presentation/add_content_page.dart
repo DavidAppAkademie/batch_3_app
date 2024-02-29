@@ -18,9 +18,17 @@ class AddContentPage extends StatefulWidget {
 
 class _AddContentPageState extends State<AddContentPage> {
   final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _sampleCodeController = TextEditingController();
+  late final TextEditingController _titleController;
+  late final TextEditingController _descriptionController;
+  late final TextEditingController _sampleCodeController;
+
+  @override
+  void initState() {
+    _titleController = TextEditingController();
+    _descriptionController = TextEditingController();
+    _sampleCodeController = TextEditingController();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -80,9 +88,6 @@ class _AddContentPageState extends State<AddContentPage> {
                       const authorFullName = "David";
                       const Widget? sampleWidget = null;
 
-                      // reset all controllers
-                      _clearFields();
-
                       // create new content object
                       final newContent = Content(
                         id,
@@ -100,6 +105,7 @@ class _AddContentPageState extends State<AddContentPage> {
                           .databaseContentRepository
                           .addContent(newContent);
 
+                      // reset all controllers
                       if (!context.mounted) return;
                       Navigator.pop(context);
                     } else {
