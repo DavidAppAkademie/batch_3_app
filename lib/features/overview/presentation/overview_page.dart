@@ -1,8 +1,9 @@
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/add_content/presentation/add_content_page.dart';
+import 'package:batch_3_app/config/content.dart';
+import 'package:batch_3_app/features/add_content_suggestion/presentation/add_content_suggestion_page.dart';
+import 'package:batch_3_app/features/add_content_suggestion/presentation/content_suggestions_screen.dart';
 import 'package:batch_3_app/features/content_detail/presentation/content_detail_page.dart';
 import 'package:batch_3_app/features/feedback/presentation/view_feedback_screen.dart';
-import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:batch_3_app/features/overview/model/feedback.dart';
 import 'package:batch_3_app/features/settings/presentation/settings_page.dart';
 import 'package:batch_3_app/repository_container.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart' hide Feedback;
 import 'package:provider/provider.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
-class OverviewPage extends StatefulWidget {
+class OverviewPage extends StatelessWidget {
   static const routeName = '/OverviewPage';
 
   const OverviewPage({
@@ -18,26 +19,15 @@ class OverviewPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<OverviewPage> createState() => _OverviewPageState();
-}
-
-class _OverviewPageState extends State<OverviewPage> {
-  late Future<List<Content>> contentList;
-
-  @override
   Widget build(BuildContext context) {
-    contentList = context
-        .read<RepositoryContainer>()
-        .databaseContentRepository
-        .getContent();
-
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute<void>(
-              builder: (BuildContext context) => const AddContentPage(),
+              builder: (BuildContext context) =>
+                  const AddContentSuggestionPage(),
             ),
           );
         },
@@ -46,6 +36,12 @@ class _OverviewPageState extends State<OverviewPage> {
       appBar: AppBar(
         title: const Text('Übersicht'),
         actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, ContentSuggestionsScreen.routeName);
+            },
+            icon: const Icon(Icons.workspaces_filled),
+          ),
           IconButton(
             onPressed: () {
               Navigator.pushNamed(context, ViewFeedbackScreen.routeName);
@@ -124,53 +120,28 @@ class _OverviewPageState extends State<OverviewPage> {
           padding: const EdgeInsets.all(Sizes.p16),
           child: Column(
             children: [
-              TextButton(
-                child: const Text("Reload test"),
-                onPressed: () {
-                  setState(() {
-                    contentList = context
-                        .read<RepositoryContainer>()
-                        .databaseContentRepository
-                        .getContent();
-                  });
-                },
-              ),
-              FutureBuilder(
-                future: contentList,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData &&
-                      snapshot.connectionState != ConnectionState.waiting) {
-                    final contents = snapshot.data!;
-                    // Daten fertig geladen, Future entpackt
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: contents.length,
-                      itemBuilder: (context, i) {
-                        // get content from contentList at position i
-                        final currentContent = contents[i];
-                        return ListTile(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) =>
-                                    ContentDetailPage(content: currentContent),
-                              ),
-                            );
-                          },
-                          title: Card(
-                              child: Padding(
-                            padding: const EdgeInsets.all(Sizes.p16),
-                            child: Text(currentContent.title),
-                          )),
-                        );
-                      },
-                    );
-                  } else {
-                    // else -> Daten nicht fertig geladen
-                    // nicht fertig geladen -> entweder Ladend oder Error
-                    return const Center(child: CircularProgressIndicator());
-                  }
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: contentList.length,
+                itemBuilder: (context, i) {
+                  // get content from contentList at position i
+                  final currentContent = contentList[i];
+                  return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                          builder: (BuildContext context) =>
+                              ContentDetailPage(content: currentContent),
+                        ),
+                      );
+                    },
+                    title: Card(
+                        child: Padding(
+                      padding: const EdgeInsets.all(Sizes.p16),
+                      child: Text(currentContent.title),
+                    )),
+                  );
                 },
               ),
             ],

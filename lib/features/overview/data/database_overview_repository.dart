@@ -1,5 +1,3 @@
 import 'package:batch_3_app/features/overview/model/content.dart';
 
-abstract class DatabaseOverviewRepository {
-  Future<List<Content>> getContent();
-}
+abstract class DatabaseOverviewRepository {}

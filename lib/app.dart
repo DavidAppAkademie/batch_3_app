@@ -1,4 +1,5 @@
 import 'package:batch_3_app/config/theme.dart';
+import 'package:batch_3_app/features/add_content_suggestion/presentation/content_suggestions_screen.dart';
 import 'package:batch_3_app/features/feedback/presentation/view_feedback_screen.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
 import 'package:batch_3_app/features/sign_up/presentation/register_page.dart';
@@ -55,6 +56,8 @@ class App extends StatelessWidget {
                       switch (settings.name) {
                         case ViewFeedbackScreen.routeName:
                           return const ViewFeedbackScreen();
+                        case ContentSuggestionsScreen.routeName:
+                          return const ContentSuggestionsScreen();
                         case OverviewPage.routeName:
                         default:
                           return const OverviewPage();

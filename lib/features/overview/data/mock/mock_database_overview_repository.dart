@@ -9,11 +9,4 @@ class MockDatabaseOverviewRepository implements DatabaseOverviewRepository {
   MockDatabaseOverviewRepository(this._mockDatabaseService);
 
   // Content functions
-  @override
-  Future<List<Content>> getContent() async {
-    // simulating slow connection (waiting 2 secs)
-    await Future.delayed(const Duration(seconds: 2));
-    // return database contents
-    return _mockDatabaseService.contentList;
-  }
 }

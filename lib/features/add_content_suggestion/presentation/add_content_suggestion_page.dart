@@ -1,22 +1,23 @@
 import 'dart:math';
 
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/add_content/application/add_content_validators.dart';
+import 'package:batch_3_app/features/add_content_suggestion/application/add_content_validators.dart';
 import 'package:batch_3_app/features/overview/model/content.dart';
 import 'package:batch_3_app/repository_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AddContentPage extends StatefulWidget {
-  const AddContentPage({
+class AddContentSuggestionPage extends StatefulWidget {
+  const AddContentSuggestionPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<AddContentPage> createState() => _AddContentPageState();
+  State<AddContentSuggestionPage> createState() =>
+      _AddContentSuggestionPageState();
 }
 
-class _AddContentPageState extends State<AddContentPage> {
+class _AddContentSuggestionPageState extends State<AddContentSuggestionPage> {
   final _formKey = GlobalKey<FormState>();
   late final TextEditingController _titleController;
   late final TextEditingController _descriptionController;
@@ -42,7 +43,7 @@ class _AddContentPageState extends State<AddContentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add content'),
+        title: const Text('Add content suggestion'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -103,7 +104,7 @@ class _AddContentPageState extends State<AddContentPage> {
                       await context
                           .read<RepositoryContainer>()
                           .databaseContentRepository
-                          .addContent(newContent);
+                          .addContentSuggestion(newContent);
 
                       // reset all controllers
                       if (!context.mounted) return;
@@ -112,7 +113,7 @@ class _AddContentPageState extends State<AddContentPage> {
                       debugPrint("Form fehlerhaft!");
                     }
                   },
-                  child: const Text("Content einsenden!"),
+                  child: const Text("Content-Vorschlag einsenden!"),
                 ),
               ],
             ),
