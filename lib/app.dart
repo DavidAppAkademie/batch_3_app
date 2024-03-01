@@ -53,10 +53,9 @@ class App extends StatelessWidget {
                     } else {
                       // User ist eingeloggt
                       switch (settings.name) {
-                        case OverviewPage.routeName:
-                          return const OverviewPage();
                         case ViewFeedbackScreen.routeName:
                           return const ViewFeedbackScreen();
+                        case OverviewPage.routeName:
                         default:
                           return const OverviewPage();
                       }
@@ -65,18 +64,9 @@ class App extends StatelessWidget {
                 );
               });
             },
-            // initialRoute: SignUpPage.routeName,
-            // routes: {
-            //   SignUpPage.routeName: (context) => const SignUpPage(),
-            //   RegisterPage.routeName: (context) => const RegisterPage(),
-            // },
             theme: getLightTheme(),
             darkTheme: getDarkTheme(),
             themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-            // home: const SignUpPage(
-
-            //     /// repos
-            //     ),
           );
         }
       },
