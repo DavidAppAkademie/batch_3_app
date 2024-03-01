@@ -1,7 +1,8 @@
 bool _isEmailLegit(String? input) {
-  RegExp exp = RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  return exp.hasMatch(input ?? "");
+  // RegExp exp = RegExp(
+  //     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  // return exp.hasMatch(input ?? "");
+  return true;
 }
 
 String? emailErrorText(String? input) {

@@ -1,32 +1,34 @@
 import 'package:batch_3_app/config/app_sizes.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
 import 'package:batch_3_app/features/sign_up/application/sign_up_validators.dart';
-import 'package:batch_3_app/features/sign_up/presentation/register_page.dart';
+import 'package:batch_3_app/features/sign_up/presentation/sign_up_page.dart';
 import 'package:batch_3_app/repository_container.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SignUpPage extends StatefulWidget {
-  static const routeName = '/SignUpPage';
+class RegisterPage extends StatefulWidget {
+  static const routeName = '/RegisterPage';
 
-  const SignUpPage({
+  const RegisterPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
+  late final TextEditingController _passwordRepeatController;
 
   @override
   void initState() {
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
+    _passwordRepeatController = TextEditingController();
     super.initState();
   }
 
@@ -34,6 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _passwordRepeatController.dispose();
     super.dispose();
   }
 
@@ -69,30 +72,45 @@ class _SignUpPageState extends State<SignUpPage> {
                       const InputDecoration(border: OutlineInputBorder()),
                   validator: passwordErrorText,
                 ),
-                gapH32,
-                Center(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        final email = _emailController.text;
-                        final password = _passwordController.text;
-                        context
-                            .read<RepositoryContainer>()
-                            .firebaseAuthRepository
-                            .loginUser(email, password);
-                      }
-                    },
-                    child: Text(
-                      "Anmelden",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                  ),
+                gapH16,
+                const Text("Passwort wiederholen"),
+                TextFormField(
+                  controller: _passwordRepeatController,
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  decoration:
+                      const InputDecoration(border: OutlineInputBorder()),
+                  validator: passwordErrorText,
                 ),
                 gapH32,
                 Center(
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Text("Passwort vergessen"),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        final email = _emailController.text;
+                        final password = _passwordController.text;
+                        final passwordRepeat = _passwordRepeatController.text;
+
+                        if (password != passwordRepeat) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Passwörter stimmen nicht überein"),
+                            ),
+                          );
+                          return;
+                        } else {
+                          // Register with Firebase Auth
+                          await context
+                              .read<RepositoryContainer>()
+                              .firebaseAuthRepository
+                              .register(email, password);
+                        }
+                      }
+                    },
+                    child: Text(
+                      "Registrieren",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
                   ),
                 ),
                 gapH32,
@@ -102,7 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Expanded(child: Divider()),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: Sizes.p8),
-                      child: Text("Noch kein Konto?"),
+                      child: Text("Du hast ein Konto?"),
                     ),
                     Expanded(child: Divider()),
                   ],
@@ -111,9 +129,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, RegisterPage.routeName);
+                      Navigator.pushNamed(context, SignUpPage.routeName);
                     },
-                    child: const Text("Kostenlos registrieren"),
+                    child: const Text("Zum Login"),
                   ),
                 ),
               ],

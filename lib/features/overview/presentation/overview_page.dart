@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OverviewPage extends StatefulWidget {
+  static const routeName = '/OverviewPage';
+
   const OverviewPage({
     Key? key,
   }) : super(key: key);
@@ -41,6 +43,15 @@ class _OverviewPageState extends State<OverviewPage> {
       appBar: AppBar(
         title: const Text('Übersicht'),
         actions: [
+          IconButton(
+            onPressed: () {
+              context
+                  .read<RepositoryContainer>()
+                  .firebaseAuthRepository
+                  .logoutUser();
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
           IconButton(
             onPressed: () {
               Navigator.push(

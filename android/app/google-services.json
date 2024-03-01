@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "442198232244",
+    "project_id": "batch-3-app",
+    "storage_bucket": "batch-3-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:442198232244:android:6355b6d152314c17f69be1",
+        "android_client_info": {
+          "package_name": "com.example.batch_3_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJSwJXoy5VTPNDjMaHmF5wxkXzeiEYMQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
