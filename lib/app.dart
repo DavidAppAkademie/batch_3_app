@@ -1,4 +1,5 @@
 import 'package:batch_3_app/config/theme.dart';
+import 'package:batch_3_app/features/feedback/presentation/view_feedback_screen.dart';
 import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
 import 'package:batch_3_app/features/sign_up/presentation/register_page.dart';
 import 'package:batch_3_app/features/sign_up/presentation/sign_up_page.dart';
@@ -51,7 +52,14 @@ class App extends StatelessWidget {
                       }
                     } else {
                       // User ist eingeloggt
-                      return const OverviewPage();
+                      switch (settings.name) {
+                        case OverviewPage.routeName:
+                          return const OverviewPage();
+                        case ViewFeedbackScreen.routeName:
+                          return const ViewFeedbackScreen();
+                        default:
+                          return const OverviewPage();
+                      }
                     }
                   },
                 );

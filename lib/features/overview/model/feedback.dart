@@ -1,6 +1,6 @@
 class Feedback {
-  int rating;
+  double rating;
   String feedbackText;
 
-  Feedback(this.rating, this.feedbackText);
+  Feedback({required this.rating, required this.feedbackText});
 }
