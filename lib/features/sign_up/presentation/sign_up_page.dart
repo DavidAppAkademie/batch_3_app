@@ -1,5 +1,4 @@
 import 'package:batch_3_app/config/app_sizes.dart';
-import 'package:batch_3_app/features/overview/presentation/overview_page.dart';
 import 'package:batch_3_app/features/sign_up/application/sign_up_validators.dart';
 import 'package:batch_3_app/features/sign_up/presentation/register_page.dart';
 import 'package:batch_3_app/repository_container.dart';
